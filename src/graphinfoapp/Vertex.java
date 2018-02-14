@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package graphinfoapp;
+import java.util.ArrayList;
 import java.util.HashMap;
 /**
  *
@@ -11,6 +12,7 @@ import java.util.HashMap;
  */
 public class Vertex {
     private int name;
+    private ArrayList<Vertex> adjacentsList=new ArrayList();
     private HashMap<Vertex, Integer> distances=new HashMap();
     
     public Vertex(){}
@@ -23,16 +25,27 @@ public class Vertex {
         this.name=name;  
     }
     
-    public void setDistance(Vertex n, int cost){  
-        this.distances.put(n, cost);
-    }
     public int getName(){ 
         return this.name;  
     }
+    public void addAdjacent(Vertex adjacent){
+        adjacentsList.add(adjacent);
+    }
+    public ArrayList getAdjacentsList(){return adjacentsList;}
     
+    public String getAdjacentsNames(){
+        String out="";
+        for(int i =0;i<adjacentsList.size();i++){
+    out+=adjacentsList.get(i).getName();
+        }
+        return out;
+    }
+    public void setDistances(Vertex n, int cost){  
+        this.distances.put(n, cost);
+    }
+
     public HashMap getDistances(){
         return this.distances;
-        
     }
     
     public int calculateEccentricity(){
